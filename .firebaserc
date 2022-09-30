@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "getsocial-5f099": {
+      "hosting": {
+        "webapp": [
+          "getsocial-5f099"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "getsocial-5f099"
+  }
+}
