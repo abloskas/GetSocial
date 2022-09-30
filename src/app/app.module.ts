@@ -15,12 +15,13 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AuthService } from "./services/auth.service";
-import { SignInComponent } from './components/sign-in/sign-in.component';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignInComponent
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,8 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
     provideStorage(() => getStorage())
   ],
   providers: [
-    ScreenTrackingService, UserTrackingService, AuthService
+    ScreenTrackingService, UserTrackingService, AuthService,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],
   bootstrap: [AppComponent]
 })

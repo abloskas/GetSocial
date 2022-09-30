@@ -22,6 +22,7 @@ export class AuthService implements OnInit {
   
   ngOnInit(): void {
     this.fireAuth.authState.subscribe(userState => {
+      console.log(userState);
       if(!!userState){
         userState = userState;
       localStorage.setItem('user', JSON.stringify(this.userState));
@@ -40,7 +41,8 @@ export class AuthService implements OnInit {
         this.setUserData(result.user);
         this.fireAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['dashboard']); //SET ROUTE HERE
+            console.log(user);
+            // this.router.navigate(['dashboard']); //SET ROUTE HERE
           }
         });
       })
