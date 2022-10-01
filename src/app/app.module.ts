@@ -16,12 +16,12 @@ import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AuthService } from "./services/auth.service";
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateAccountComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

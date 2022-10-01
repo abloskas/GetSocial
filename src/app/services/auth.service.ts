@@ -7,21 +7,20 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService implements OnInit {
   userState: any;
-  constructor(private fireAuth: AngularFireAuth,  private fireStore: AngularFirestore, private router: Router) { }
-
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return !!(user && user?.emailVerified);
+  authState$: Observable<any>;
+  constructor(private fireAuth: AngularFireAuth,  private fireStore: AngularFirestore, private router: Router) { 
+    this.authState$ = this.fireAuth.authState;
   }
   
   ngOnInit(): void {
-    this.fireAuth.authState.subscribe(userState => {
+    this.authState$.subscribe(userState => {
       console.log(userState);
       if(!!userState){
         userState = userState;
@@ -39,12 +38,7 @@ export class AuthService implements OnInit {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.setUserData(result.user);
-        this.fireAuth.authState.subscribe((user) => {
-          if (user) {
-            console.log(user);
-            // this.router.navigate(['dashboard']); //SET ROUTE HERE
-          }
-        });
+       return result;
       })
       .catch((error) => {
         window.alert(error.message);
@@ -62,13 +56,12 @@ export class AuthService implements OnInit {
     return this.fireAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign 
-        up and returns promise */
-        this._sendVerificationMail();
         this.setUserData(result.user);
+        return result;
       })
       .catch((error) => {
-        window.alert(error.message); // TBD update to notification banner
+        console.log("ERROR =>", error);
+        window.alert(error); // TBD update to notification banner
       });
   }
 
@@ -79,14 +72,13 @@ export class AuthService implements OnInit {
         window.alert('Password reset email sent, check your inbox.'); // TBD update to notification banner
       })
       .catch((error) => {
-        window.alert(error);
+        window.alert(error); // TBD update to notification banner
       });
   }
 
   signOut() {
     return this.fireAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']); // TBD set up this route
     });
   }
 
@@ -111,7 +103,7 @@ export class AuthService implements OnInit {
     return this.fireAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        this.router.navigate(['verify-email-address']); // TDB set up route for this
+        window.alert('Confirm Email Address; if correct, continue') // TDB set up route for this
       });
   }
 

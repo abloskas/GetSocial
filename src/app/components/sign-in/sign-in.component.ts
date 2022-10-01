@@ -22,7 +22,11 @@ export class SignInComponent implements OnInit {
     if(!email || !password) {
       return;
   }
-  this.authService.signIn(email, password);
+  this.authService.signIn(email, password).then((data) => {
+    if(!!data?.user){
+      this.router.navigate(['dashboard'])
+    }
+  });
   }
 
   createAccount(): void {

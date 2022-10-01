@@ -1,1 +1,19 @@
-<p>create-account works!</p>
+<div class="displayTable">
+    <div class="displayTableCell">
+      <div class="authBlock">
+        <h3>Create Account</h3>
+        <div class="formGroup">
+          <input type="text" class="formControl" placeholder="Username" #userName required>
+        </div>
+        <div class="formGroup">
+          <input type="password" class="formControl" placeholder="Password" #userPassword required>
+        </div>
+         <!-- Calling SignIn Api from AuthService -->
+         <div class="formGroup">
+            <input type="button" class="btn btnPrimary" value="Create Account" (click)="createAccount(userName.value, userPassword.value)">
+          </div>
+      </div>
+    
+    </div>
+  </div>
+  

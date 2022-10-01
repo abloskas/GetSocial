@@ -1,0 +1,16 @@
+.header {
+  max-height: 75px;
+  background-color: lightblue;  
+  .header-data {
+    display: flex;
+    justify-content: space-between;
+  }
+  .header-image {
+        max-width: 75px;
+  }
+  .header-links > * {
+    padding:10px;
+    cursor: pointer;
+  }
+
+}
