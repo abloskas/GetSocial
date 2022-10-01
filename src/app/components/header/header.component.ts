@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject, pipe, takeUntil } from 'rxjs';
+import { Observable, Subject, pipe, takeUntil, map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       } 
     );
   }
+  
   signOut(): void {
     this.authService.signOut().then(() => {
       this.router.navigate(['sign-in']);

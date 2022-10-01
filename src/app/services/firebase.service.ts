@@ -1,9 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseService {
+export class FirebaseService implements OnDestroy {
+  isDestroyed$: Subject<boolean> = new Subject<boolean>();
+  constructor(private fireStore: AngularFirestore) {
+   }
 
-  constructor() { }
+
+  ngOnDestroy() {
+    this.isDestroyed$.next(true);
+    this.isDestroyed$.complete();
+  }  
 }

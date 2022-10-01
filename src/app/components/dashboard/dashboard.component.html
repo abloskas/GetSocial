@@ -1,1 +1,6 @@
-<p>dashboard works!</p>
+<ng-container *ngFor="let post of posts$ | async">
+    <div>
+
+        <p>{{ post |json }}</p>
+    </div>
+</ng-container>

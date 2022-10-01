@@ -17,6 +17,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AuthService } from "./services/auth.service";
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { HeaderComponent } from './components/header/header.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardModule } from './components/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { HeaderComponent } from './components/header/header.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DashboardModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
